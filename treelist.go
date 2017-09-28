@@ -28,12 +28,23 @@ func insert(node *TreeNode, value int) *TreeNode {
 	return node
 }
 
-func traverse(node *TreeNode) {
+func convertTree(node *TreeNode) *TreeNode {
+	var x TreeNode
+	return &x
+}
+
+func traverseList(node *TreeNode) {
+	for p := node; p != nil; p = p.left {
+		fmt.Printf("%d\n", p.data)
+	}
+}
+
+func traverseTree(node *TreeNode) {
 	if node == nil { return }
 
-	traverse(node.left)
+	traverseTree(node.left)
 	fmt.Printf("%d\n", node.data)
-	traverse(node.right)
+	traverseTree(node.right)
 }
 
 func main() {
@@ -43,7 +54,6 @@ func main() {
 		val, err := strconv.Atoi(str)
 
 		if err == nil {
-			fmt.Printf("insert %d\n", val)
 			root = insert(root, val)
 		} else {
 			fmt.Printf("Problem with %q: %s\n", str, err)
@@ -51,6 +61,13 @@ func main() {
 	}
 
 	if root != nil {
-		traverse(root)
+		fmt.Printf("Sorted binary tree traversal:\n")
+		traverseTree(root)
+		head := convertTree(root)
+		if head != nil {
+			fmt.Printf("\nList traversal:\n")
+			traverseList(head)
+		}
 	}
+
 }
