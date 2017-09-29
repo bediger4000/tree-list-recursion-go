@@ -28,9 +28,17 @@ func insert(node *TreeNode, value int) *TreeNode {
 	return node
 }
 
-func convertTree(node *TreeNode) *TreeNode {
-	var x TreeNode
-	return &x
+func convertTree(node *TreeNode, parent *TreeNode) *TreeNode {
+
+	if node.left != nil {
+		convertTree(node.left, node)
+	}
+
+	if node.right != nil {
+		convertTree(node.right, node)
+	} else {
+		node.right = parent
+	}
 }
 
 func traverseList(node *TreeNode) {
@@ -63,7 +71,7 @@ func main() {
 	if root != nil {
 		fmt.Printf("Sorted binary tree traversal:\n")
 		traverseTree(root)
-		head := convertTree(root)
+		head := convertTree(root, nil)
 		if head != nil {
 			fmt.Printf("\nList traversal:\n")
 			traverseList(head)
