@@ -28,23 +28,29 @@ func insert(node *TreeNode, value int) *TreeNode {
 	return node
 }
 
-func convertTree(node *TreeNode, parent *TreeNode) *TreeNode {
+func convertTree(node *TreeNode, tail *TreeNode) *TreeNode {
 
-	if node.left != nil {
-		convertTree(node.left, node)
+	left := node.left
+	right := node.right
+
+	if left != nil {
+		tail = convertTree(left, tail)
 	}
 
-	if node.right != nil {
-		convertTree(node.right, node)
-	} else {
-		node.right = parent
+	if tail != nil {
+		tail.right = node
 	}
+	node.left  = tail
+	tail = node
+
+	if right != nil {
+		tail = convertTree(right, tail)
+	}
+
+	return tail
 }
 
 func traverseList(node *TreeNode) {
-	for p := node; p != nil; p = p.left {
-		fmt.Printf("%d\n", p.data)
-	}
 }
 
 func traverseTree(node *TreeNode) {
@@ -71,10 +77,21 @@ func main() {
 	if root != nil {
 		fmt.Printf("Sorted binary tree traversal:\n")
 		traverseTree(root)
-		head := convertTree(root, nil)
-		if head != nil {
+
+		tail := convertTree(root, nil)
+		if tail != nil {
+			fmt.Printf("\nReverse list traversal:\n")
+			for p := tail; p != nil; p = p.left {
+				fmt.Printf("%d\n", p.data)
+			}
+
+			var head *TreeNode
+			for head = tail; head.left != nil; head = head.left { }
+
 			fmt.Printf("\nList traversal:\n")
-			traverseList(head)
+			for p := head; p != nil; p = p.right {
+				fmt.Printf("%d\n", p.data)
+			}
 		}
 	}
 
