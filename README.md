@@ -1,6 +1,6 @@
 # The Great Tree-List Recursion Problem
 
-I decided to do this in Go. I did it in C a long time ago.
+I decided to do this in Go. [I did it in C](https://github.com/bediger4000/tree-list-recursion-c) a long time ago.
 
 # Problem Statement
 
@@ -10,4 +10,4 @@ should play the role of "previous" and the "large" pointer should play the role
 of "next". The list should be arranged so that the nodes are in increasing
 order... 
 
-# Design
+# Comparison of C and Go version
