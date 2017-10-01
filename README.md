@@ -11,3 +11,7 @@ of "next". The list should be arranged so that the nodes are in increasing
 order... 
 
 # Comparison of C and Go version
+
+The whole point of doing both, C in 2008, Go in 2017, should consist of a comparison. Lots of text and thought need to go here.
+
+I did the C version with more official software engineering care. I formatted it consistently.
